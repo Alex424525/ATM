@@ -9,8 +9,8 @@
 #while문을 이용해서 입금, 출금 ,영수증보기, 종료라는 기능이 졸료라는 버튼을 누르기전 전까지 계속해서 노출 되도록 만들어주세요.
 #종료를 누르면 서비스를 종료한다는 메서지를 출력하고 현재 잔액을 보여주세요.
 
-balance = 3000 #현재 잔액
-receiots = []
+banlance= 3000 #현재 잔액
+receipts = []
 
 while True:
     print()
@@ -18,26 +18,30 @@ while True:
     if num == "4":
         break
     if num == "1":
-        deposit_amount = input("입금할 금액은 입력해주세요 : ")
-        if deposit_amount.isdigit() and int(deposit_amount) > 0:
-            balance = balance + int(deposit_amount)
-            receiots.append("입금", deposit_amount, balance)
-            print(f"입금하신 금액은 {deposit_amount}원이고, 현재 잔액은 {balance}원 입니다.")
+        deposit_amount = input("입금할 금액은 입력해주세요 : ") #1000
+        if deposit_amount.isdigit() and int(deposit_amount) > 0: #1000-> True, 천원 -> False
+            banlance = banlance + int(deposit_amount) #banlance += deposit_amount
+            receipts.append(("입금", deposit_amount, banlance))
+            print(f"입금하신 금액은 {deposit_amount}원이고, 현재 잔액은 {banlance}원 입니다.")
         else:
             print("!!입금한 금액을 숫자 형태와 음수가 아닌값을 입력해주세요.!!")
     if num == "2": 
-        withdraw_amount = int(input("출금할 금액을 입력하세요: "))
-        withdraw_amount = min(balance, withdraw_amount)
+        withdraw_amount = int(input("출금할 금액을 입력하세요: ")) #2000
+        withdraw_amount = min(banlance, withdraw_amount)
         withdraw_amount = int(withdraw_amount)
-        balance -= withdraw_amount
-        receiots.append(("출금",withdraw_amount,balance))
-        print(f'출금하신금액은 {withdraw_amount}원이고,현재잔액은 {balance}원 입니다.')
-    else:
-       print("출금한 금액이 현재 잔액을 초과합니다.")
+        banlance -= withdraw_amount
+        receipts.append(("출금",withdraw_amount,banlance))
+        print(f'출금하신금액은 {withdraw_amount}원이고,현재잔액은 {banlance}원 입니다.')
+    if num == "3": # 영수증 값이 있을때 , 없을떼
+        if receipts : 
+            print("===영수증===")
+            for receipt_rinting in receipts:
+                print(f"{receipt_rinting[0]}: {receipt_rinting[1]}원 | 잔액 : {receipt_rinting[2]}원")
+        else:
+            print("영수증이 내역이 없습니다.")
 
-   
  
  
-print(f'서비스를 종료합니다.현제잔액은{balance}원 입니다.')
+print(f'서비스를 종료합니다.현제잔액은{banlance}원 입니다.')
     
 
